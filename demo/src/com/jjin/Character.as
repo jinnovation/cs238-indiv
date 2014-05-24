@@ -3,6 +3,8 @@ package com.jjin
     import org.flixel.*;
     import org.flixel.plugin.photonstorm.FlxMath;
 
+    import com.jjin.POI;
+
     public class Character extends FlxSprite
     {
         protected var _moveSpeed:int;
