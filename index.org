@@ -1,0 +1,96 @@
+#+TITLE: Finding Elizabeth
+
+# bullshit hackery
+#+AUTHOR: Pathfinding and Alternative Realism
+#+EMAIL: Jonathan Jin
+
+#+DATE: 05/29/14
+
+#+OPTIONS: toc:nil num:nil reveal_progress
+#+REVEAL_HLEVEL: 1
+#+REVEAL_ROOT: ./
+
+* On Realism
+
+  - *Realism* = common goal among development teams
+  - \uparrow realism \to \uparrow desirability
+
+* Graphics
+
+  - Commonly used to achieve realism
+    - *Very* good at this
+  - Modern-day graphics hardware \to \downarrow tech barriers
+
+** [[file:img/Crysis3ExplosionsBeneaththeLibertyDome.png]]
+   #+BEGIN_NOTES
+   Commonality among most modern-day AAA video games
+   #+END_NOTES
+** [[file:img/1367625794.jpg]]
+   #+BEGIN_NOTES
+   All...
+   #+END_NOTES
+** [[file:img/TombRaider_2013_03_06_02_25_01_757.jpg]]
+   #+BEGIN_NOTES
+   Insanely...
+   #+END_NOTES
+** [[file:img/O0vv1b7 - Imgur.jpg]]
+   #+BEGIN_NOTES
+   Realistic visually.
+   #+END_NOTES
+** [[file:img/hiccups2.gif]]
+   #+BEGIN_NOTES
+   Exception: a couple hiccups.
+   #+END_NOTES
+** [[file:img/tombraider-2013-03-29-21-07-25-94.jpg]]
+   #+BEGIN_NOTES
+   But for most part OK.
+   #+END_NOTES
+
+** A Slight Problem
+
+   - Visual realism = "straightforward"
+   - *Inherent difficulties* associated with computer graphics
+     - Diminishing returns
+     - Uncanny Valley
+   - Impede increase of realism solely by graphical means
+   - *Need*: new, alternative ways to \uparrow realism
+
+* [[file:img/bsi_logo.png]]
+
+** [[file:img/elizabeth.gif]]
+
+** What They Did
+
+   - Unique *path-finding algorithm* for Elizabeth
+   - Approximate & model *humanity*
+     - Curiosity
+     - Autonomy
+
+* The Algorithm: Key Points
+
+  - Leader-follower model
+  - Destination-setting
+  - Points of Interest (POIs)
+
+** Leader-follower model
+
+   - *Leader* and *Follower*
+     - "Mothership"
+       - Follower's positioning and movement = relative to =Leader.position=
+   - Follower freely set Destination Points within =Leader.maxFollowerRadius=
+
+** Destination Points
+
+   - At any given moment, Follower has a *destination point*
+   - Will try to move toward that point
+   - Upon reaching, *set new destination point*
+
+** POIs
+
+   - *Points of Interest* (*POIs*) in environment
+   - Follower may interact with any POI within a certain radius
+     - Overrides Leader-Follower radius restrictions
+       - Reinstated upon interaction completion
+
+* Demo Time
+  #+REVEAL_HTML: <object width="900" height="500"> <param name="movie" value="demo/demo.swf"> <embed src="demo/demo.swf" width="900" height="500"> </embed> </object>

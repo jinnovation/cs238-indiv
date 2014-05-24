@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Finding Elizabeth</title>
+<meta name="author" content="(Pathfinding and Alternative Realism)"/>
+<link rel="stylesheet" href="./css/reveal.min.css"/>
+<link rel="stylesheet" href="./css/theme/default.css" id="theme"/>
+
+<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+<script>
+    if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = './css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    }
+</script>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section>
+<h1>Finding Elizabeth</h1>
+<h2>Pathfinding and Alternative Realism</h2>
+<h2><a href="mailto:Jonathan Jin">Jonathan Jin</a></h2>
+<h2>05/29/14</h2></section>
+
+<section>
+<section id="sec-1" >
+
+<h2>On Realism</h2>
+<ul class="org-ul">
+<li><b>Realism</b> = common goal among development teams
+</li>
+<li>&uarr; realism &rarr; &uarr; desirability
+</li>
+</ul>
+</section>
+
+</section>
+<section>
+<section id="sec-2" >
+
+<h2>Graphics</h2>
+<ul class="org-ul">
+<li>Commonly used to achieve realism
+<ul class="org-ul">
+<li><b>Very</b> good at this
+</li>
+</ul>
+</li>
+<li>Modern-day graphics hardware &rarr; &darr; tech barriers
+</li>
+</ul>
+
+</section>
+<section id="sec-2-1" >
+
+<h3><img src="img/Crysis3ExplosionsBeneaththeLibertyDome.png" alt="Crysis3ExplosionsBeneaththeLibertyDome.png" /></h3>
+<aside class="notes">
+<p>
+Commonality among most modern-day AAA video games
+</p>
+</aside>
+</section>
+<section id="sec-2-2" >
+
+<h3><img src="img/1367625794.jpg" alt="1367625794.jpg" /></h3>
+<aside class="notes">
+<p>
+All&#x2026;
+</p>
+</aside>
+</section>
+<section id="sec-2-3" >
+
+<h3><img src="img/TombRaider_2013_03_06_02_25_01_757.jpg" alt="TombRaider_2013_03_06_02_25_01_757.jpg" /></h3>
+<aside class="notes">
+<p>
+Insanely&#x2026;
+</p>
+</aside>
+</section>
+<section id="sec-2-4" >
+
+<h3><img src="img/O0vv1b7 - Imgur.jpg" alt="O0vv1b7 - Imgur.jpg" /></h3>
+<aside class="notes">
+<p>
+Realistic visually.
+</p>
+</aside>
+</section>
+<section id="sec-2-5" >
+
+<h3><img src="img/hiccups2.gif" alt="hiccups2.gif" /></h3>
+<aside class="notes">
+<p>
+Exception: a couple hiccups.
+</p>
+</aside>
+</section>
+<section id="sec-2-6" >
+
+<h3><img src="img/tombraider-2013-03-29-21-07-25-94.jpg" alt="tombraider-2013-03-29-21-07-25-94.jpg" /></h3>
+<aside class="notes">
+<p>
+But for most part OK.
+</p>
+</aside>
+
+</section>
+<section id="sec-2-7" >
+
+<h3>A Slight Problem</h3>
+<ul class="org-ul">
+<li>Visual realism = "straightforward"
+</li>
+<li><b>Inherent difficulties</b> associated with computer graphics
+<ul class="org-ul">
+<li>Diminishing returns
+</li>
+<li>Uncanny Valley
+</li>
+</ul>
+</li>
+<li>Impede increase of realism solely by graphical means
+</li>
+<li><b>Need</b>: new, alternative ways to &uarr; realism
+</li>
+</ul>
+</section>
+
+</section>
+<section>
+<section id="sec-3" >
+
+<h2><img src="img/bsi_logo.png" alt="bsi_logo.png" /></h2>
+</section>
+<section id="sec-3-1" >
+
+<h3><img src="img/elizabeth.gif" alt="elizabeth.gif" /></h3>
+
+</section>
+<section id="sec-3-2" >
+
+<h3>What They Did</h3>
+<ul class="org-ul">
+<li>Unique <b>path-finding algorithm</b> for Elizabeth
+</li>
+<li>Approximate &amp; model <b>humanity</b>
+<ul class="org-ul">
+<li>Curiosity
+</li>
+<li>Autonomy
+</li>
+</ul>
+</li>
+</ul>
+</section>
+
+</section>
+<section>
+<section id="sec-4" >
+
+<h2>The Algorithm: Key Points</h2>
+<ul class="org-ul">
+<li>Leader-follower model
+</li>
+<li>Destination-setting
+</li>
+<li>Points of Interest (POIs)
+</li>
+</ul>
+
+</section>
+<section id="sec-4-1" >
+
+<h3>Leader-follower model</h3>
+<ul class="org-ul">
+<li><b>Leader</b> and <b>Follower</b>
+<ul class="org-ul">
+<li>"Mothership"
+<ul class="org-ul">
+<li>Follower's positioning and movement = relative to <code>Leader.position</code>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Follower freely set Destination Points within <code>Leader.maxFollowerRadius</code>
+</li>
+</ul>
+
+</section>
+<section id="sec-4-2" >
+
+<h3>Destination Points</h3>
+<ul class="org-ul">
+<li>At any given moment, Follower has a <b>destination point</b>
+</li>
+<li>Will try to move toward that point
+</li>
+<li>Upon reaching, <b>set new destination point</b>
+</li>
+</ul>
+
+</section>
+<section id="sec-4-3" >
+
+<h3>POIs</h3>
+<ul class="org-ul">
+<li><b>Points of Interest</b> (<b>POIs</b>) in environment
+</li>
+<li>Follower may interact with any POI within a certain radius
+<ul class="org-ul">
+<li>Overrides Leader-Follower radius restrictions
+<ul class="org-ul">
+<li>Reinstated upon interaction completion
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</section>
+
+</section>
+<section>
+<section id="sec-5" >
+
+<h2>Demo Time</h2>
+<object width="900" height="500"> <param name="movie" value="demo/demo.swf"> <embed src="demo/demo.swf" width="900" height="500"> </embed> </object>
+</section>
+</section>
+</div>
+</div>
+<script src="./lib/js/head.min.js"></script>
+<script src="./js/reveal.min.js"></script>
+<script>
+
+        		// Full list of configuration options available here:
+        		// https://github.com/hakimel/reveal.js#configuration
+        		Reveal.initialize({
+        			controls: true,
+        			progress: true,
+        			history: false,
+        			center: true,
+                                slideNumber: true,
+        			rollingLinks: false,
+        			keyboard: true,
+        			overview: true,
+        			 // slide width
+        			 // slide height
+        			 // slide margin
+        			 // slide minimum scaling factor
+        			 // slide maximum scaling factor
+
+
+        			theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+        			transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+        			transitionSpeed: 'default',
+
+        			// Optional libraries used to extend on reveal.js
+        			dependencies: [
+        				{ src: './lib/js/classList.js', condition: function() { return !document.body.classList; } }
+        				,{ src: './plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } }
+        				,{ src: './plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } }
+        				,{ src: './plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+        				,{ src: './plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } }
+        				,{ src: './plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+        				// { src: './plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; } }
+        				// { src: './plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+         				
+        			]
+        		});
+</script>
+</body>
+</html>

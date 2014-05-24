@@ -1,0 +1,100 @@
+* Resources
+
+  - [[http://www.polygon.com/2014/3/18/5522450/the-long-road-to-perfecting-ai-for-bioshock-infinites-elizabeth][Polygon article]]
+
+* Intro
+
+  - Computer graphics have advanced to point that now, while not necessarily
+    trivial, is reasonably "straightforward" to achieve a considerable degree
+    of visual realism
+  - As result, game designers and developers should look elsewhere for means to
+    achieve greater levels of realism in the final product
+
+** Bioshock Infinite
+
+* The Algorithm
+
+** Key points
+
+*** Key entities
+
+    - Two entities: *Leader* and *Follower*
+      - "Mothership" relationship
+        - Follower's positioning and movement always relative to that of Leader
+    - Follower can freely move within a certain radius of Leader
+      
+**** Follower
+
+     - At any given moment, has a *destination* point
+     - Will try to move toward that point
+     - Upon arrival at destination, *set new*
+
+*** POIs
+
+    - *Points of Interest* (*POI*) in environment 
+    - At any point, Follower may choose to interact with any POI within a
+     certain radius of itself
+      - Overrides Leader-Follower radius restrictions for duration
+      - Upon completion, Leader-Follower radius restrictions immediately reinstated
+
+** Pseudo implementation
+
+   #+BEGIN_SRC java
+     class Map
+     {
+         List<POI> POIs;
+     
+         Point goal;
+     }
+     
+     class POI
+     {
+         Point location;
+     }
+     
+     class Leader
+     {
+         int fRadiusMin;
+         int fRadiusMax;
+         PlayerController controller;
+     
+         public void Leader(int r) {
+             this.fRadius = r;
+         }
+     
+         public void onUpdate() {
+             this.controller.onKeypress();
+         }
+     }
+     
+     class Follower
+     {
+         Leader leader;
+     
+         Point dest;
+     
+         public void Follower(Leader leader)
+         {
+             this.leader = leader;
+         }
+     
+         public void interact(POI object)
+         {
+             
+         }
+     
+         public void onUpdate() {
+             this.move();
+         }
+     
+         private void move() {
+             if (distFromLeader > leader.fRadiusMax
+                 || distFromLeader < leader.fRadiusMin)
+                 {
+                     this.resetDest();
+                 }
+         }
+     }
+   #+END_SRC
+
+** Implementation (Flixel)
