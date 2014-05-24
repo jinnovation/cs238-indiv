@@ -102,5 +102,8 @@
       - Overrides Leader-Follower radius restrictions
         - Reinstated upon interaction completion
 
+* The Implementation
+  # TODO: code samples
+
 * Demo Time
   #+REVEAL_HTML: <object width="900" height="500"> <param name="movie" value="demo/demo.swf"> <embed src="demo/demo.swf" width="900" height="500"> </embed> </object>

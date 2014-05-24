@@ -18,8 +18,9 @@ package com.jjin.state
         = new FlxSprite(850, 200, Assets.IMG_GOAL);
         public static function get goal():FlxSprite { return _goal; }
 
-        private var nInteractables:int = 5;
-        private var interactables:FlxGroup;
+        private static var nInteractables:int = 5;
+        private var _interactables:FlxGroup = new FlxGroup(nInteractables);
+        public function get interactables():FlxGroup { return _interactables; }
         
         override public function create():void {
             super.create();
@@ -30,19 +31,19 @@ package com.jjin.state
             add(follower);
             add(follower.destMarker);
             add(follower.bubbleSight);
+            add(follower.dialogBox);
 
             add(_goal);
 
-            interactables = new FlxGroup(nInteractables);
             var interactableCurr:POI;
             for (var i:int=0 ; i<nInteractables ; i++) {
                 var xPos:int = FlxMath.rand(0, FlxG.width);
                 var yPos:int = FlxMath.rand(0, FlxG.height);
                 interactableCurr = new POI(xPos, yPos);
-                interactables.add(interactableCurr);
+                _interactables.add(interactableCurr);
             }
 
-            add(interactables);
+            add(_interactables);
         }
 
         override public function update():void {

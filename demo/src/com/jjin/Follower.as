@@ -10,6 +10,8 @@ package com.jjin
     import org.flixel.plugin.photonstorm.FlxVelocity;
     import org.flixel.plugin.photonstorm.FlxMath;
 
+    import flash.utils.getQualifiedClassName;
+
     public class Follower extends Character implements Interaction
     {
         private var _leader:Leader;
@@ -97,28 +99,48 @@ package com.jjin
             move();
 
             if (FlxVelocity.distanceToPoint(this, this._dest) < _destR) {
-                if (scanForPOIs() != null) {
-                    //   setDestTarget(POI);
+                var i:POI = scanForPOIs();
+                
+                if (i != null) {
+                    setDestTarget(i);
                 } else {
                     this.setRandomDest();
                 }
             }
+
+            super.update();
         }
 
         private function move():void
         {
             FlxVelocity.moveTowardsPoint(this, this._dest, moveSpeed, 1000);
             FlxVelocity.moveTowardsPoint(this._bubbleSight, this._dest, moveSpeed, 1000);
+            FlxVelocity.moveTowardsPoint(this._dialogBox, this._dest, moveSpeed, 1000);
         }
 
         private function scanForPOIs():POI
         {
-            return null;        // TODO
+            var stateInteractables:FlxGroup = PlayState(FlxG.state).interactables;
+
+            for each (var i:POI in stateInteractables)
+            {
+                if (FlxVelocity.distanceBetween(this, i) < _bubbleSight.radius) {
+                    return i;
+                }
+            }
+            
+            return null;
         }
 
         public function interact(item: POI):void
         {
-            
+            // TODO
+            say(item.quip);
+        }
+
+        private function say(line:String):void
+        {
+            // TODO
         }
     }
 
