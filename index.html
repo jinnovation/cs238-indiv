@@ -3,8 +3,8 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
-<title>Finding Elizabeth</title>
-<meta name="author" content="(Pathfinding and Alternative Realism)"/>
+<title>Finding Elizabeth: Pathfinding and Alternative Realism</title>
+<meta name="author" content="(Jonathan Jin)"/>
 <link rel="stylesheet" href="./css/reveal.min.css"/>
 <link rel="stylesheet" href="./css/theme/default.css" id="theme"/>
 
@@ -23,9 +23,9 @@
 <div class="reveal">
 <div class="slides">
 <section>
-<h1>Finding Elizabeth</h1>
-<h2>Pathfinding and Alternative Realism</h2>
-<h2><a href="mailto:Jonathan Jin">Jonathan Jin</a></h2>
+<h1>Finding Elizabeth: Pathfinding and Alternative Realism</h1>
+<h2>Jonathan Jin</h2>
+<h2><a href="mailto:jjin082693@uchicago.edu">jjin082693@uchicago.edu</a></h2>
 <h2>05/29/14</h2></section>
 
 <section>
@@ -150,11 +150,13 @@ But for most part OK.
 <ul class="org-ul">
 <li>Unique <b>path-finding algorithm</b> for Elizabeth
 </li>
-<li>Approximate &amp; model <b>humanity</b>
+<li>Goal: algorithmically model <b>humanity</b> &amp; <b>realistic human behavior</b>
 <ul class="org-ul">
 <li>Curiosity
 </li>
 <li>Autonomy
+</li>
+<li>Exploration
 </li>
 </ul>
 </li>
@@ -165,7 +167,11 @@ But for most part OK.
 <section>
 <section id="sec-4" >
 
-<h2>The Algorithm: Key Points</h2>
+<h2>The Algorithm</h2>
+</section>
+<section id="sec-4-1" >
+
+<h3>Key Points</h3>
 <ul class="org-ul">
 <li>Leader-follower model
 </li>
@@ -176,28 +182,91 @@ But for most part OK.
 </ul>
 
 </section>
-<section id="sec-4-1" >
+<section id="sec-4-2" >
 
 <h3>Leader-follower model</h3>
-<ul class="org-ul">
-<li><b>Leader</b>
-<ul class="org-ul">
-<li>"Mothership"
-</li>
-</ul>
-</li>
-<li><b>Follower</b>
-<ul class="org-ul">
-<li>Position and movement = relative to <code>Leader.position</code>
-</li>
-<li>Freely set Destination Points between Leader and goal positions
-</li>
-</ul>
-</li>
-</ul>
+</section>
+<section id="sec-4-2-1" >
+
+<h4>Leader</h4>
+<div class="org-src-container">
+
+<pre  class="src src-java"><span style="color: #89AAEB;">class</span> <span style="color: #98f5ff;">Leader</span> <span style="color: #89AAEB;">extends</span> <span style="color: #98f5ff;">Character</span>
+{
+    <span style="color: #89AAEB;">private</span> <span style="color: #98f5ff;">Periphery</span> <span style="color: #ebcb8b;">bubblePersonal</span>;
+    <span style="color: #89AAEB;">private</span> <span style="color: #98f5ff;">Periphery</span> <span style="color: #ebcb8b;">bubbleFollower</span>;
+
+    <span style="color: #89AAEB;">public</span> <span style="color: #98f5ff;">FlxPoint</span> <span style="color: #DCA432;">randomPointWithinRadius</span>(<span style="color: #98f5ff;">int</span> <span style="color: #ebcb8b;">radius</span>);
+    <span style="color: #89AAEB;">public</span> <span style="color: #98f5ff;">FlxPoint</span> <span style="color: #DCA432;">randomPointWithinBubbleFollower</span>();
+
+    <span style="color: #89AAEB;">private</span> <span style="color: #98f5ff;">void</span> <span style="color: #DCA432;">handleKeypress</span>();
+    <span style="color: #89AAEB;">private</span> <span style="color: #98f5ff;">void</span> <span style="color: #DCA432;">handleMovement</span>();
+}
+</pre>
+</div>
 
 </section>
-<section id="sec-4-1-1" >
+<section id="sec-4-2-2" >
+
+<h4>Follower</h4>
+<div class="org-src-container">
+
+<pre  class="src src-java"><span style="color: #89AAEB;">class</span> <span style="color: #98f5ff;">Follower</span> <span style="color: #89AAEB;">extends</span> <span style="color: #98f5ff;">Character</span> <span style="color: #89AAEB;">implements</span> <span style="color: #98f5ff;">Interaction</span>
+{
+    <span style="color: #89AAEB;">private</span> <span style="color: #98f5ff;">Leader</span> <span style="color: #ebcb8b;">dearLeader</span>;
+
+    <span style="color: #89AAEB;">private</span> <span style="color: #98f5ff;">FlxPoint</span> <span style="color: #ebcb8b;">destCurr</span>;
+    <span style="color: #89AAEB;">private</span> <span style="color: #98f5ff;">FlxSprite</span> <span style="color: #ebcb8b;">destMarker</span>;
+
+    <span style="color: #89AAEB;">private</span> <span style="color: #98f5ff;">Periphery</span> <span style="color: #ebcb8b;">bubbleSight</span>;
+
+    <span style="color: #89AAEB;">private</span> <span style="color: #89AAEB;">static</span> <span style="color: #89AAEB;">const</span> <span style="color: #98f5ff;">int</span> <span style="color: #ebcb8b;">destRadius</span>;
+    <span style="color: #89AAEB;">private</span> <span style="color: #89AAEB;">static</span> <span style="color: #89AAEB;">const</span> <span style="color: #98f5ff;">int</span> <span style="color: #ebcb8b;">visionDist</span>;
+
+    <span style="color: #89AAEB;">private</span> <span style="color: #98f5ff;">void</span> <span style="color: #DCA432;">setDestTarget</span>(<span style="color: #98f5ff;">FlxObject</span> <span style="color: #ebcb8b;">target</span>);
+    <span style="color: #89AAEB;">private</span> <span style="color: #98f5ff;">void</span> <span style="color: #DCA432;">setDest</span>(<span style="color: #98f5ff;">int</span> <span style="color: #ebcb8b;">x</span>, <span style="color: #98f5ff;">int</span> <span style="color: #ebcb8b;">y</span>);
+    <span style="color: #89AAEB;">private</span> <span style="color: #98f5ff;">void</span> <span style="color: #DCA432;">setDestRandom</span>();
+
+    <span style="color: #89AAEB;">public</span> <span style="color: #98f5ff;">void</span> <span style="color: #DCA432;">update</span>()
+    {
+        <span style="color: #98f5ff;">boolean</span> <span style="color: #ebcb8b;">isWithinRange</span> =
+            distToPoint(<span style="color: #89AAEB;">this</span>, <span style="color: #89AAEB;">this</span>.destCurr) &lt; <span style="color: #89AAEB;">this</span>.destRadius;
+        <span style="color: #89AAEB;">if</span> (isWithinRange &amp;&amp; (<span style="color: #98f5ff;">POI</span> <span style="color: #ebcb8b;">i</span> = scanForPOIs()) != <span style="color: #B4EB89;">null</span>)
+                setDestTarget(i);
+        <span style="color: #89AAEB;">else</span>
+            setDestRandom();
+    }
+}
+</pre>
+</div>
+
+</section>
+<section>
+<div class="org-src-container">
+
+<pre  class="src src-java"><span style="color: #89AAEB;">class</span> <span style="color: #98f5ff;">Follower</span> <span style="color: #89AAEB;">extends</span> <span style="color: #98f5ff;">Character</span> <span style="color: #89AAEB;">implements</span> <span style="color: #98f5ff;">Interaction</span>
+{
+    <span style="color: #4f5b67;">// </span><span style="color: #4f5b67;">...</span>
+
+    <span style="color: #89AAEB;">public</span> <span style="color: #98f5ff;">POI</span> <span style="color: #DCA432;">scanForPOIs</span>()
+    {
+        foreach (i <span style="color: #98f5ff;">in</span> currenStage.<span style="color: #ebcb8b;">interactables</span>) {
+            <span style="color: #98f5ff;">boolean</span> <span style="color: #ebcb8b;">isWithinRange</span>
+                = distBetween(<span style="color: #89AAEB;">this</span>, i) &lt; <span style="color: #89AAEB;">this</span>.bubbleSight.radius;
+
+            <span style="color: #89AAEB;">if</span> (isWithinRange) <span style="color: #89AAEB;">return</span> i;
+        }
+        <span style="color: #89AAEB;">return</span> <span style="color: #B4EB89;">null</span>;        
+    }
+
+    <span style="color: #89AAEB;">public</span> <span style="color: #98f5ff;">void</span> <span style="color: #DCA432;">interact</span>(<span style="color: #98f5ff;">POI</span> <span style="color: #ebcb8b;">item</span>);
+    <span style="color: #89AAEB;">public</span> <span style="color: #98f5ff;">void</span> <span style="color: #DCA432;">say</span>(<span style="color: #98f5ff;">String</span> <span style="color: #ebcb8b;">line</span>);
+}
+</pre>
+</div>
+
+</section>
+<section id="sec-4-2-3" >
 
 <h4>Destination Points</h4>
 <ul class="org-ul">
@@ -210,18 +279,22 @@ But for most part OK.
 </ul>
 
 </section>
-<section id="sec-4-2" >
+<section id="sec-4-3" >
 
 <h3>Map: Key Elements</h3>
-<ul class="org-ul">
-<li>Goal
-</li>
-<li>Points of Interest (POIs)
-</li>
-</ul>
+<div class="org-src-container">
+
+<pre  class="src src-java"><span style="color: #89AAEB;">class</span> <span style="color: #98f5ff;">PlayState</span> <span style="color: #89AAEB;">extends</span> <span style="color: #98f5ff;">FlxState</span>
+{
+    <span style="color: #89AAEB;">private</span> <span style="color: #98f5ff;">FlxSprite</span> <span style="color: #ebcb8b;">goal</span>;
+    <span style="color: #89AAEB;">private</span> <span style="color: #98f5ff;">List</span>&lt;POI&gt; interactables; <span style="color: #4f5b67;">// </span><span style="color: #4f5b67;">randomly generated</span>
+
+}
+</pre>
+</div>
 
 </section>
-<section id="sec-4-2-1" >
+<section id="sec-4-3-1" >
 
 <h4>Points of Interest (POIs)</h4>
 <ul class="org-ul">
