@@ -85,7 +85,7 @@
    - Will try to move toward that point
    - Upon reaching, *set new destination point*
 
-** POIs
+** Points of Interest (POIs)
 
    - *Points of Interest* (*POIs*) in environment
    - Follower may interact with any POI within a certain radius
