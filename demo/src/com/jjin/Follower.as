@@ -4,10 +4,11 @@ package com.jjin
 
     import com.jjin.R.*;    
     import com.jjin.Leader;
+    import com.jjin.POI;
     import org.flixel.plugin.photonstorm.FlxVelocity;
     import org.flixel.plugin.photonstorm.FlxMath;
 
-    public class Follower extends Character
+    public class Follower extends Character implements Interaction
     {
         private var leader:Leader;
 
@@ -66,8 +67,21 @@ package com.jjin
             FlxVelocity.moveTowardsPoint(this, this._dest, moveSpeed, 1000);
 
             if (FlxVelocity.distanceToPoint(this, this._dest) < _destR) {
-                this.setRandomDest();
+                if (scanForPOIs() != null) {
+                    //   setDest(POI location);
+                } else {
+                    this.setRandomDest();
+                }
             }
+        }
+
+        private function scanForPOIs():POI {
+            return null;        // TODO
+        }
+
+        public function interact(item: POI):void
+        {
+            
         }
     }
 
