@@ -10,21 +10,14 @@ package com.jjin
 
     public class Leader extends Character
     {
-        private static const LEFT  :int	= 0;
-        private static const RIGHT :int	= 1;
-        private static const DOWN  :int	= 2;
-        private static const UP    :int	= 3;
-
-        // private const _personalBubbleR:int = 50;
-
-        private var _personalBubble:Periphery;
-        public function get personalBubble():Periphery { return _personalBubble; }
+        private var _bubblePersonal:Periphery;
+        public function get bubblePersonal():Periphery { return _bubblePersonal; }
 
         public function Leader(X:int, Y:int, graphic:Class=null):void
         {
             super(X,Y, graphic);
 
-            _personalBubble = new Periphery(this, 50, 0xff33ff33);
+            _bubblePersonal = new Periphery(this, 50, 0xff33ff33);
         }
 
         public function get center():FlxPoint
@@ -39,7 +32,7 @@ package com.jjin
 
         public function randomRadiusVector():FlxPoint
         {
-            var l2:int = _personalBubble.radius * _personalBubble.radius;
+            var l2:int = _bubblePersonal.radius * _bubblePersonal.radius;
 
             var x2:int = FlxMath.rand(0, l2);
             var y2:int = l2 - x2;
@@ -74,19 +67,19 @@ package com.jjin
             switch (dir) {
                 case LEFT:
                 this.x -= moveSpeed;
-                this._personalBubble.x -= moveSpeed;
+                this._bubblePersonal.x -= moveSpeed;
                 break;
                 case RIGHT:
                 this.x += moveSpeed;
-                this._personalBubble.x += moveSpeed;
+                this._bubblePersonal.x += moveSpeed;
                 break;
                 case UP:
                 this.y -= moveSpeed;
-                this._personalBubble.y -= moveSpeed;
+                this._bubblePersonal.y -= moveSpeed;
                 break;
                 case DOWN:
                 this.y += moveSpeed;
-                this._personalBubble.y += moveSpeed;
+                this._bubblePersonal.y += moveSpeed;
                 break;
             }
         }

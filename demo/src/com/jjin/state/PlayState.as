@@ -20,9 +20,10 @@ package com.jjin.state
             super.create();
 
             add(leader);
-            add(leader.personalBubble);
+            add(leader.bubblePersonal);
             add(follower);
             add(follower.destMarker);
+            add(follower.bubbleSight);
 
             add(chest1);
         }

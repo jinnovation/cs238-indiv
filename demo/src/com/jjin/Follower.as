@@ -5,6 +5,7 @@ package com.jjin
     import com.jjin.R.*;    
     import com.jjin.Leader;
     import com.jjin.POI;
+    import com.jjin.Periphery;
     import org.flixel.plugin.photonstorm.FlxVelocity;
     import org.flixel.plugin.photonstorm.FlxMath;
 
@@ -15,12 +16,17 @@ package com.jjin
         private var _dest:FlxPoint;
         private var _destMarker:FlxSprite;
 
+        private var _bubbleSight:Periphery;
+        public function get bubbleSight():Periphery { return _bubbleSight; }
+
         private static const _destR :int = 20;
+        private static const _visionDist:int = 80;
 
         public function Follower(X:int, Y:int,
             leader:Leader, graphic:Class=null):void
         {
             super(X,Y, graphic);
+            _bubbleSight = new Periphery(this, _visionDist, 0xff0000);
 
             this.setLeader(leader);
             this.setRandomDest();
@@ -28,6 +34,22 @@ package com.jjin
 
         public function setLeader(ldr:Leader):void { this.leader = ldr; }
 
+        private function setDestTarget(target:FlxObject):void {
+            if (_dest == null) {
+                _dest = new FlxPoint(target.x, target.y);
+            } else {
+                _dest.x = target.x;
+                _dest.y = target.y;
+            }
+
+            if (_destMarker == null) {
+                _destMarker = new FlxSprite(target.x, target.y, Assets.IMG_RETICLE);
+            } else {
+                _destMarker.x = target.x;
+                _destMarker.y = target.y;
+            }
+        }
+        
         private function setDest(x:int, y:int):void
         {
             if (_dest == null) {
@@ -62,18 +84,25 @@ package com.jjin
 
         override public function update():void
         {
-            FlxVelocity.moveTowardsPoint(this, this._dest, moveSpeed, 1000);
+            move();
 
             if (FlxVelocity.distanceToPoint(this, this._dest) < _destR) {
                 if (scanForPOIs() != null) {
-                    //   setDest(POI location);
+                    //   setDestTarget(POI);
                 } else {
                     this.setRandomDest();
                 }
             }
         }
 
-        private function scanForPOIs():POI {
+        private function move():void
+        {
+            FlxVelocity.moveTowardsPoint(this, this._dest, moveSpeed, 1000);
+            FlxVelocity.moveTowardsPoint(this._bubbleSight, this._dest, moveSpeed, 1000);
+        }
+
+        private function scanForPOIs():POI
+        {
             return null;        // TODO
         }
 
