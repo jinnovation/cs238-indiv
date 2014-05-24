@@ -12,7 +12,7 @@ package
 	{
 	    FlxG.visualDebug = true;
 
-	    super(450, 250, StartState, 2);
+	    super(900, 500, StartState, 1);
 	}
     }
 }

@@ -13,11 +13,18 @@ package com.jjin
         private var _bubblePersonal:Periphery;
         public function get bubblePersonal():Periphery { return _bubblePersonal; }
 
+        private var _bubbleFollower:Periphery;
+        public function get bubbleFollower():Periphery { return _bubbleFollower; }
+
         public function Leader(X:int, Y:int, graphic:Class=null):void
         {
             super(X,Y, graphic);
 
             _bubblePersonal = new Periphery(this, 50, 0xff33ff33);
+            _bubbleFollower = new Periphery(this, 200, 0xff0000ff);
+
+            accessories.add(_bubblePersonal);
+            accessories.add(_bubbleFollower);
         }
 
         public function get center():FlxPoint
@@ -30,16 +37,29 @@ package com.jjin
             this.handleKeypress();
         }
 
-        public function randomRadiusVector():FlxPoint
+        public function randWithinRadius(radius:int):FlxPoint
         {
-            var l2:int = _bubblePersonal.radius * _bubblePersonal.radius;
+            var l2:int = radius * radius;
 
-            var x2:int = FlxMath.rand(0, l2);
-            var y2:int = l2 - x2;
-            var x:int = Math.floor(Math.sqrt(x2)) * FlxMath.randomSign();
-            var y:int = Math.floor(Math.sqrt(y2)) * FlxMath.randomSign();
+            do {
+                var x2:int = FlxMath.rand(0, l2)/2;
+                var y2:int = FlxMath.rand(0, l2)/2;
+
+                var x:int = Math.floor(Math.sqrt(x2)) * FlxMath.randomSign();
+                var y:int = Math.floor(Math.sqrt(y2)) * FlxMath.randomSign();
+
+                var distFrom:Number
+                = FlxMath.vectorLength(x - this.center.x,
+                    y - this.center.y);
+                
+            } while (distFrom < this.bubblePersonal.radius);
 
             return new FlxPoint(x,y);
+        }
+
+        public function randWithinBubbleFollower():FlxPoint
+        {
+            return randWithinRadius(_bubbleFollower.radius);
         }
 
         private function handleKeypress():void
@@ -64,22 +84,35 @@ package com.jjin
 
         private function move(dir:int):void
         {
+            var accessory:FlxObject;
+
             switch (dir) {
                 case LEFT:
                 this.x -= moveSpeed;
-                this._bubblePersonal.x -= moveSpeed;
+                for each (accessory in accessories.members) {
+                    accessory.x -= moveSpeed;
+                }
                 break;
+
                 case RIGHT:
                 this.x += moveSpeed;
-                this._bubblePersonal.x += moveSpeed;
+                for each (accessory in accessories.members) {
+                    accessory.x += moveSpeed;
+                }
                 break;
+
                 case UP:
                 this.y -= moveSpeed;
-                this._bubblePersonal.y -= moveSpeed;
+                for each (accessory in accessories.members) {
+                    accessory.y -= moveSpeed;
+                }
                 break;
+
                 case DOWN:
                 this.y += moveSpeed;
-                this._bubblePersonal.y += moveSpeed;
+                for each (accessory in accessories.members) {
+                    accessory.y += moveSpeed;
+                }
                 break;
             }
         }

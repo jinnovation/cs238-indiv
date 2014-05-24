@@ -13,5 +13,8 @@ package com.jjin.R
 
         [Embed(source="../../../../assets/chest.jpg")]
         public static const IMG_CHEST:Class;
+
+        [Embed(source="../../../../assets/goal_small.jpg")]
+        public static const IMG_GOAL:Class;
     }
 }

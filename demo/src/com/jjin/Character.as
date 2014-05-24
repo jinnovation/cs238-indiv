@@ -8,12 +8,16 @@ package com.jjin
     public class Character extends FlxSprite
     {
         protected var _moveSpeed:int;
+
+        protected var _accessories:FlxGroup;
+        public function get accessories():FlxGroup { return _accessories; }
         
         public function Character(X:int, Y:int,
             graphic:Class = null, spd:int = 5):void
         {
             super(X, Y, graphic);
-
+            
+            _accessories = new FlxGroup;
             _moveSpeed = spd;
         }
 

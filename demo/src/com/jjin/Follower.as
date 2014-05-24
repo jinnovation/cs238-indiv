@@ -6,12 +6,13 @@ package com.jjin
     import com.jjin.Leader;
     import com.jjin.POI;
     import com.jjin.Periphery;
+    import com.jjin.state.PlayState;
     import org.flixel.plugin.photonstorm.FlxVelocity;
     import org.flixel.plugin.photonstorm.FlxMath;
 
     public class Follower extends Character implements Interaction
     {
-        private var leader:Leader;
+        private var _leader:Leader;
 
         private var _dest:FlxPoint;
         private var _destMarker:FlxSprite;
@@ -28,11 +29,11 @@ package com.jjin
             super(X,Y, graphic);
             _bubbleSight = new Periphery(this, _visionDist, 0xff0000);
 
-            this.setLeader(leader);
+            this.leader = leader;
             this.setRandomDest();
         }
 
-        public function setLeader(ldr:Leader):void { this.leader = ldr; }
+        public function set leader(ldr:Leader):void { _leader = ldr; }
 
         private function setDestTarget(target:FlxObject):void {
             if (_dest == null) {
@@ -73,10 +74,19 @@ package com.jjin
         {
             // TODO: set world as bounds as well
 
-            var seed:FlxPoint = leader.randomRadiusVector();
+            var seed:FlxPoint = _leader.randWithinBubbleFollower();
+
+            var wOffset:int = (seed.x<0 ? -1 : 1)*this.width;
+            var hOffset:int = (seed.y<0 ? -1 : 1)*this.height;
             
-            var xNew:int = leader.center.x + seed.x + (seed.x<0 ? -1 : 1)*this.width;
-            var yNew:int = leader.center.y + seed.y + (seed.y<0 ? -1 : 1*this.height);
+            var xNew:int = _leader.center.x + seed.x;
+            var yNew:int = _leader.center.y + seed.y;
+
+            var vecLeaderGoal:FlxPoint
+            = FlxVelocity.vectorFromTo(_leader, PlayState.goal);
+
+            xNew += Math.random()*vecLeaderGoal.x;
+            yNew += Math.random()*vecLeaderGoal.y;
 
             setDest(xNew,yNew);
         }

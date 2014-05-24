@@ -23,7 +23,7 @@
 
 ** [[file:img/Crysis3ExplosionsBeneaththeLibertyDome.png]]
    #+BEGIN_NOTES
-   Commonality among most modern-day AAA video games
+   Commonality among most modern-day AAA video game graphics
    #+END_NOTES
 ** [[file:img/1367625794.jpg]]
    #+BEGIN_NOTES
@@ -70,27 +70,37 @@
 
   - Leader-follower model
   - Destination-setting
-  - Points of Interest (POIs)
-
+  - Goals and Points of Interest (POIs)
+    
 ** Leader-follower model
 
-   - *Leader* and *Follower*
+   - *Leader*
      - "Mothership"
-       - Follower's positioning and movement = relative to =Leader.position=
-   - Follower freely set Destination Points within =Leader.maxFollowerRadius=
+   - *Follower*
+     - Position and movement = relative to =Leader.position=
+     - Freely set Destination Points between Leader and goal positions
 
-** Destination Points
+*** Destination Points
 
-   - At any given moment, Follower has a *destination point*
-   - Will try to move toward that point
-   - Upon reaching, *set new destination point*
+    - At any given moment, Follower has a *destination point*
+    - Will try to move toward that point
+    - Upon reaching, *set new destination point*
 
-** Points of Interest (POIs)
+** Map: Key Elements
+   
+   - Goal
+   - Points of Interest (POIs)
 
-   - *Points of Interest* (*POIs*) in environment
-   - Follower may interact with any POI within a certain radius
-     - Overrides Leader-Follower radius restrictions
-       - Reinstated upon interaction completion
+*** Points of Interest (POIs)
+
+    - *Points of Interest* (*POIs*) in environment
+    - Follower may *interact* with any POI within =Follower.sightRadius=
+      - Interactions:
+        - Clever quips
+        - Item acquisition
+        - Etc.
+      - Overrides Leader-Follower radius restrictions
+        - Reinstated upon interaction completion
 
 * Demo Time
   #+REVEAL_HTML: <object width="900" height="500"> <param name="movie" value="demo/demo.swf"> <embed src="demo/demo.swf" width="900" height="500"> </embed> </object>

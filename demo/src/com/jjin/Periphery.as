@@ -10,12 +10,11 @@ package com.jjin
         
         public function Periphery(center:FlxObject, radius:int, color:int=0xffffff):void
         {
-            super(center.x - center.width / 2, center.y - center.height / 2);
+            super(center.x - radius + center.width / 2, center.y - radius + center.height / 2);
 
             _radius = radius;
-            this.makeGraphic(_radius*2, _radius*2, 0x00000000);
-
             _lineColor = color;
+            this.makeGraphic(_radius*2, _radius*2, 0x00000000);
         }
 
         override public function update(): void

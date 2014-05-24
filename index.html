@@ -62,7 +62,7 @@
 <h3><img src="img/Crysis3ExplosionsBeneaththeLibertyDome.png" alt="Crysis3ExplosionsBeneaththeLibertyDome.png" /></h3>
 <aside class="notes">
 <p>
-Commonality among most modern-day AAA video games
+Commonality among most modern-day AAA video game graphics
 </p>
 </aside>
 </section>
@@ -171,7 +171,7 @@ But for most part OK.
 </li>
 <li>Destination-setting
 </li>
-<li>Points of Interest (POIs)
+<li>Goals and Points of Interest (POIs)
 </li>
 </ul>
 
@@ -180,24 +180,26 @@ But for most part OK.
 
 <h3>Leader-follower model</h3>
 <ul class="org-ul">
-<li><b>Leader</b> and <b>Follower</b>
+<li><b>Leader</b>
 <ul class="org-ul">
 <li>"Mothership"
+</li>
+</ul>
+</li>
+<li><b>Follower</b>
 <ul class="org-ul">
-<li>Follower's positioning and movement = relative to <code>Leader.position</code>
+<li>Position and movement = relative to <code>Leader.position</code>
+</li>
+<li>Freely set Destination Points between Leader and goal positions
 </li>
 </ul>
-</li>
-</ul>
-</li>
-<li>Follower freely set Destination Points within <code>Leader.maxFollowerRadius</code>
 </li>
 </ul>
 
 </section>
-<section id="sec-4-2" >
+<section id="sec-4-1-1" >
 
-<h3>Destination Points</h3>
+<h4>Destination Points</h4>
 <ul class="org-ul">
 <li>At any given moment, Follower has a <b>destination point</b>
 </li>
@@ -208,14 +210,35 @@ But for most part OK.
 </ul>
 
 </section>
-<section id="sec-4-3" >
+<section id="sec-4-2" >
 
-<h3>Points of Interest (POIs)</h3>
+<h3>Map: Key Elements</h3>
+<ul class="org-ul">
+<li>Goal
+</li>
+<li>Points of Interest (POIs)
+</li>
+</ul>
+
+</section>
+<section id="sec-4-2-1" >
+
+<h4>Points of Interest (POIs)</h4>
 <ul class="org-ul">
 <li><b>Points of Interest</b> (<b>POIs</b>) in environment
 </li>
-<li>Follower may interact with any POI within a certain radius
+<li>Follower may <b>interact</b> with any POI within <code>Follower.sightRadius</code>
 <ul class="org-ul">
+<li>Interactions:
+<ul class="org-ul">
+<li>Clever quips
+</li>
+<li>Item acquisition
+</li>
+<li>Etc.
+</li>
+</ul>
+</li>
 <li>Overrides Leader-Follower radius restrictions
 <ul class="org-ul">
 <li>Reinstated upon interaction completion

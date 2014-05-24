@@ -190,11 +190,21 @@ package org.flixel.plugin.photonstorm
 		 */
 		public static function distanceBetween(a:FlxSprite, b:FlxSprite):int
 		{
-			var dx:Number = (a.x + a.origin.x) - (b.x + b.origin.x);
-			var dy:Number = (a.y + a.origin.y) - (b.y + b.origin.y);
-			
-			return int(FlxMath.vectorLength(dx, dy));
+		    var dx:Number = (a.x + a.origin.x) - (b.x + b.origin.x);
+		    var dy:Number = (a.y + a.origin.y) - (b.y + b.origin.y);
+                    
+		    return int(FlxMath.vectorLength(dx, dy));
 		}
+
+                // JJIN
+                public static function vectorFromTo(a:FlxSprite, b:FlxSprite):FlxPoint
+                {
+                    var dx:Number = (b.x) - (a.x + a.origin.x);
+		    var dy:Number = (b.y + b.origin.y) - (a.y + a.origin.y);
+
+                    return new FlxPoint(dx, dy);
+                }
+                    
 		
 		/**
 		 * Find the distance (in pixels, rounded) from an FlxSprite to the given FlxPoint, taking the source origin into account
