@@ -6,6 +6,8 @@ package com.jjin
     import com.jjin.R.Str;
     import com.jjin.R.Keybinding;
 
+    import com.jjin.Periphery;
+
     public class Leader extends Character
     {
         private static const LEFT  :int	= 0;
@@ -13,47 +15,31 @@ package com.jjin
         private static const DOWN  :int	= 2;
         private static const UP    :int	= 3;
 
-        private const _personalBubbleR:int = 50;
+        // private const _personalBubbleR:int = 50;
 
-        private var _personalBubble:FlxSprite;
-
-        public function get personalBubble():FlxSprite { return _personalBubble; }
-
-        public function get personalBubbleR():int { return _personalBubbleR; }
+        private var _personalBubble:Periphery;
+        public function get personalBubble():Periphery { return _personalBubble; }
 
         public function Leader(X:int, Y:int, graphic:Class=null):void
         {
             super(X,Y, graphic);
 
-            this.makePersonalBubble();
+            _personalBubble = new Periphery(this, 50, 0xff33ff33);
         }
 
         public function get center():FlxPoint
-        { return new FlxPoint(this.x + this.width / 2, this.y + this.height / 2); }
-
-        private function makePersonalBubble():void
         {
-            this._personalBubble =
-            new FlxSprite(this.x -this.width / 2, this.y - this.height / 2);
-            this._personalBubble.makeGraphic(this._personalBubbleR*2,
-                this._personalBubbleR*2, 0x00000000);
+            return new FlxPoint(this.x + this.width / 2, this.y + this.height / 2);
         }
 
         override public function update():void
         {
             this.handleKeypress();
-            this.drawPersonalBubble();
-        }
-
-        private function drawPersonalBubble():void {
-            drawCircle(this._personalBubble,
-                new FlxPoint(this._personalBubbleR, this._personalBubbleR),
-                this._personalBubbleR, 0xff33ff33, 1);
         }
 
         public function randomRadiusVector():FlxPoint
         {
-            var l2:int = _personalBubbleR * _personalBubbleR;
+            var l2:int = _personalBubble.radius * _personalBubble.radius;
 
             var x2:int = FlxMath.rand(0, l2);
             var y2:int = l2 - x2;
