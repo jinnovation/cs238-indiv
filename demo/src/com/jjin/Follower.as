@@ -2,7 +2,7 @@ package com.jjin
 {
     import org.flixel.*;
 
-    import com.jjin.R.Str;
+    import com.jjin.R.*;    
     import com.jjin.Leader;
     import org.flixel.plugin.photonstorm.FlxVelocity;
     import org.flixel.plugin.photonstorm.FlxMath;
@@ -38,7 +38,7 @@ package com.jjin
             }
 
             if (_destMarker == null) {
-                _destMarker = new FlxSprite(x, y);
+                _destMarker = new FlxSprite(x, y, Assets.IMG_RETICLE);
             } else {
                 _destMarker.x = x;
                 _destMarker.y = y;

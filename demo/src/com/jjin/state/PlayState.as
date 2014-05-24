@@ -4,15 +4,17 @@ package com.jjin.state
 
     import com.jjin.R.*;
 
-    import com.jjin.Leader;
-    import com.jjin.Follower;
+    import com.jjin.*;
 
     public class PlayState extends FlxState
     {
         private var leader:Leader
-        = new Leader(0, 0, Assets.IMG_BOOKER);
+        = new Leader(200, 200, Assets.IMG_BOOKER);
         private var follower:Follower
         = new Follower(100, 0, leader, Assets.IMG_LIZZY);
+
+        private var chest1:POI
+        = new POI(50, 50);
         
         override public function create():void {
             super.create();
@@ -21,6 +23,8 @@ package com.jjin.state
             add(leader.personalBubble);
             add(follower);
             add(follower.destMarker);
+
+            add(chest1);
         }
 
         override public function update():void {
