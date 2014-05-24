@@ -15,8 +15,7 @@ package com.jjin
         private var _dest:FlxPoint;
         private var _destMarker:FlxSprite;
 
-        private static const _destR:int = 20;
-        private const followR:int = 20;
+        private static const _destR :int = 20;
 
         public function Follower(X:int, Y:int,
             leader:Leader, graphic:Class=null):void
@@ -55,7 +54,6 @@ package com.jjin
             var seed:FlxPoint = leader.randomRadiusVector();
             
             var xNew:int = leader.center.x + seed.x + (seed.x<0 ? -1 : 1)*this.width;
-
             var yNew:int = leader.center.y + seed.y + (seed.y<0 ? -1 : 1*this.height);
 
             setDest(xNew,yNew);
