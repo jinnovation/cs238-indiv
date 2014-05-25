@@ -24,7 +24,7 @@ package com.jjin
         public function get bubbleSight():Periphery { return _bubbleSight; }
 
         private static const _destR :int = 20;
-        private static const _visionDist:int = 80;
+        private static const _visionDist:int = 100;
         
         private var dialogTimer:FlxDelay = new FlxDelay(2000);
 
@@ -102,7 +102,13 @@ package com.jjin
             move();
 
             if (FlxVelocity.distanceToPoint(this, this._dest) < _destR) {
-                scanForPOIs();
+                // scanForPOIsInteract();
+                var i:POI = scanForPOIs();
+
+                if (i != null) {
+                    interact(i);
+                } 
+
                 this.setRandomDest();
             }
 
@@ -120,16 +126,18 @@ package com.jjin
             FlxVelocity.moveTowardsPoint(this._dialogBox, this._dest, moveSpeed, 1000);
         }
 
-        private function scanForPOIs():void
+        private function scanForPOIs():POI
         {
             var stateInteractables:FlxGroup = PlayState(FlxG.state).interactables;
 
             for each (var i:POI in stateInteractables.members)
             {
                 if (FlxVelocity.distanceBetween(this, i) < _bubbleSight.radius) {
-                    interact(i);
+                    return i;
                 }
             }
+
+            return null;
         }
 
         public function interact(item: POI):void

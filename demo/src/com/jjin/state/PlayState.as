@@ -22,20 +22,30 @@ package com.jjin.state
         private var _interactables:FlxGroup = new FlxGroup(nInteractables);
         public function get interactables():FlxGroup { return _interactables; }
         
-        override public function create():void {
+        override public function create():void
+        {
             super.create();
 
-            add(leader);
-            add(leader.accessories);
-
-            add(follower);
-            add(follower.destMarker);
-            add(follower.bubbleSight);
-            add(follower.dialogBox);
+            addLeader();
+            addFollower();
 
             add(_goal);
 
             interactablesGenerate();
+        }
+
+        private function addLeader():void
+        {
+            add(leader);
+            add(leader.accessories);
+        }
+
+        private function addFollower():void
+        {
+            add(follower);
+            add(follower.destMarker);
+            add(follower.bubbleSight);
+            add(follower.dialogBox);
         }
 
         private function interactablesGenerate():void
@@ -54,7 +64,8 @@ package com.jjin.state
             add(_interactables);
         }
 
-        override public function update():void {
+        override public function update():void
+        {
             super.update();
         }
     }
