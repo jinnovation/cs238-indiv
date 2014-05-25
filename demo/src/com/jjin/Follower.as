@@ -9,6 +9,7 @@ package com.jjin
     import com.jjin.state.PlayState;
     import org.flixel.plugin.photonstorm.FlxVelocity;
     import org.flixel.plugin.photonstorm.FlxMath;
+    import org.flixel.plugin.photonstorm.FlxDelay;
 
     import flash.utils.getQualifiedClassName;
 
@@ -24,6 +25,8 @@ package com.jjin
 
         private static const _destR :int = 20;
         private static const _visionDist:int = 80;
+        
+        private var dialogTimer:FlxDelay = new FlxDelay(2000);
 
         public function Follower(X:int, Y:int,
             leader:Leader, graphic:Class=null):void
@@ -99,13 +102,12 @@ package com.jjin
             move();
 
             if (FlxVelocity.distanceToPoint(this, this._dest) < _destR) {
-                var i:POI = scanForPOIs();
-                
-                if (i != null) {
-                    setDestTarget(i);
-                } else {
-                    this.setRandomDest();
-                }
+                scanForPOIs();
+                this.setRandomDest();
+            }
+
+            if (dialogTimer.hasExpired) {
+                dialogBox.text = "";
             }
 
             super.update();
@@ -118,29 +120,27 @@ package com.jjin
             FlxVelocity.moveTowardsPoint(this._dialogBox, this._dest, moveSpeed, 1000);
         }
 
-        private function scanForPOIs():POI
+        private function scanForPOIs():void
         {
             var stateInteractables:FlxGroup = PlayState(FlxG.state).interactables;
 
-            for each (var i:POI in stateInteractables)
+            for each (var i:POI in stateInteractables.members)
             {
                 if (FlxVelocity.distanceBetween(this, i) < _bubbleSight.radius) {
-                    return i;
+                    interact(i);
                 }
             }
-            
-            return null;
         }
 
         public function interact(item: POI):void
         {
-            // TODO
             say(item.quip);
         }
 
         private function say(line:String):void
         {
-            // TODO
+            this.dialogBox.text = line;
+            dialogTimer.start();
         }
     }
 

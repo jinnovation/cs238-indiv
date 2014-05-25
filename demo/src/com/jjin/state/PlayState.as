@@ -35,11 +35,19 @@ package com.jjin.state
 
             add(_goal);
 
+            interactablesGenerate();
+        }
+
+        private function interactablesGenerate():void
+        {
             var interactableCurr:POI;
             for (var i:int=0 ; i<nInteractables ; i++) {
                 var xPos:int = FlxMath.rand(0, FlxG.width);
                 var yPos:int = FlxMath.rand(0, FlxG.height);
+
                 interactableCurr = new POI(xPos, yPos);
+                interactableCurr.quip = "Quip number " + Number(i+1).toString();
+
                 _interactables.add(interactableCurr);
             }
 
