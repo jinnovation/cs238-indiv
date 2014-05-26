@@ -152,16 +152,16 @@
                   if (isWithinRange) return i;
               }
               return null;
+          }
 
-              public void update()
-              {
-                  this.move();
-                  if (distanceToPoint(this, this.destCurr) < this.destRadius) {
-                      if ((POI i = scanForPOIs()) != null)
-                          interact(i);
+          public void update()
+          {
+              this.move();
+              if (distanceToPoint(this, this.destCurr) < this.destRadius) {
+                  if ((POI i = scanForPOIs()) != null)
+                      interact(i);
 
-                      setRandomDest();
-                  }
+                  setRandomDest();
               }
           }
 

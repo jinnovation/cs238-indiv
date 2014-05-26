@@ -287,16 +287,16 @@ But for most part OK.
             <span style="color: #89AAEB;">if</span> (isWithinRange) <span style="color: #89AAEB;">return</span> i;
         }
         <span style="color: #89AAEB;">return</span> <span style="color: #B4EB89;">null</span>;
+    }
 
-        <span style="color: #89AAEB;">public</span> <span style="color: #98f5ff;">void</span> <span style="color: #ebcb8b;">update</span>()
-        {
-            <span style="color: #89AAEB;">this</span>.move();
-            <span style="color: #89AAEB;">if</span> (distanceToPoint(<span style="color: #89AAEB;">this</span>, <span style="color: #89AAEB;">this</span>.destCurr) &lt; <span style="color: #89AAEB;">this</span>.destRadius) {
-                <span style="color: #89AAEB;">if</span> ((<span style="color: #98f5ff;">POI</span> <span style="color: #ebcb8b;">i</span> = scanForPOIs()) != <span style="color: #B4EB89;">null</span>)
-                    interact(i);
+    <span style="color: #89AAEB;">public</span> <span style="color: #98f5ff;">void</span> <span style="color: #DCA432;">update</span>()
+    {
+        <span style="color: #89AAEB;">this</span>.move();
+        <span style="color: #89AAEB;">if</span> (distanceToPoint(<span style="color: #89AAEB;">this</span>, <span style="color: #89AAEB;">this</span>.destCurr) &lt; <span style="color: #89AAEB;">this</span>.destRadius) {
+            <span style="color: #89AAEB;">if</span> ((<span style="color: #98f5ff;">POI</span> <span style="color: #ebcb8b;">i</span> = scanForPOIs()) != <span style="color: #B4EB89;">null</span>)
+                interact(i);
 
-                setRandomDest();
-            }
+            setRandomDest();
         }
     }
 
