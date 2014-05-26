@@ -13,35 +13,42 @@
 * On Realism
 
   - *Realism* = common goal among development teams
-  - \uparrow realism \to \uparrow desirability
+    - Believability
+    - Credibility
+  - \uparrow realism \to \uparrow consumer desire \to \uparrow profit
 
 * Graphics
 
   - Commonly used to achieve realism
-    - *Very* good at this
-  - Modern-day graphics hardware \to \downarrow tech barriers
+  - *Very* good at this
+    - Modern-day graphics hardware \to \downarrow tech barriers
 
 ** [[file:img/Crysis3ExplosionsBeneaththeLibertyDome.png]]
    #+BEGIN_NOTES
    Commonality among most modern-day AAA video game graphics
    #+END_NOTES
 ** [[file:img/1367625794.jpg]]
+
    #+BEGIN_NOTES
    All...
    #+END_NOTES
 ** [[file:img/TombRaider_2013_03_06_02_25_01_757.jpg]]
+
    #+BEGIN_NOTES
    Insanely...
    #+END_NOTES
 ** [[file:img/O0vv1b7 - Imgur.jpg]]
+
    #+BEGIN_NOTES
-   Realistic visually.
+   Realistic.
    #+END_NOTES
 ** [[file:img/hiccups2.gif]]
+
    #+BEGIN_NOTES
    Exception: a couple hiccups.
    #+END_NOTES
 ** [[file:img/tombraider-2013-03-29-21-07-25-94.jpg]]
+
    #+BEGIN_NOTES
    But for most part OK.
    #+END_NOTES
@@ -49,9 +56,10 @@
 ** A Slight Problem
 
    - Visual realism = "straightforward"
-   - *Inherent difficulties* associated with computer graphics
+     - Established tech stack + practices
+   - \exists *Inherent difficulties* associated with computer graphics
      - Diminishing returns
-     - Uncanny Valley
+     - *Uncanny Valley*
    - Impede increase of realism solely by graphical means
    - *Need*: new, alternative ways to \uparrow realism
 
@@ -62,18 +70,24 @@
 ** What They Did
 
    - Unique *path-finding algorithm* for Elizabeth
-   - Goal: algorithmically model *humanity* & *realistic human behavior*
-     - Curiosity
-     - Autonomy
-     - Exploration
+   - Goals
+     - Algorithmically model *humanity* & *realistic human behavior*
+       - Curiosity
+       - Autonomy
+       - Exploration
+     - Create emotional attachment + investment to her
 
 * The Algorithm
 
 ** Key Points
 
+   - "Both follow and lead"
+     - Balance distance to PC
+       - "Too close is too creepy"
+     - Free movement between PC and next *goal location*
    - Leader-follower model
-   - Destination-setting
-   - Goals and Points of Interest (POIs)
+   - Points of Interest (POIs)
+     - Freely *inspect* + *comment on* game world objects
      
 ** Leader-follower model
 
@@ -95,35 +109,33 @@
 
 *** Follower
       #+BEGIN_SRC java
-                class Follower extends Character implements Interaction
-                {
-                    private Leader dearLeader;
+        class Follower extends Character implements Interaction
+        {
+            private Leader dearLeader;
 
-                    private FlxPoint destCurr;
-                    private FlxSprite destMarker;
+            private FlxPoint destCurr;
+            private FlxSprite destMarker;
 
-                    private Periphery bubbleSight;
+            private Periphery bubbleSight;
 
-                    private static const int destRadius;
-                    private static const int visionDist;
+            private void setDestTarget(FlxObject target);
+            private void setDest(int x, int y);
+            private void setDestRandom();
 
-                    private void setDestTarget(FlxObject target);
-                    private void setDest(int x, int y);
-                    private void setDestRandom();
-
-                    public void update()
-                    {
-                        boolean isWithinRange =
-                            distToPoint(this, this.destCurr) < this.destRadius;
-                        if (isWithinRange && (POI i = scanForPOIs()) != null)
-                                setDestTarget(i);
-                        else
-                            setDestRandom();
-                    }
-                }
+            public void update()
+            {
+                boolean isWithinRange =
+                    distToPoint(this, this.destCurr) < this.destRadius;
+                if (isWithinRange && (POI i = scanForPOIs()) != null)
+                        setDestTarget(i);
+                else
+                    setDestRandom();
+            }
+        }
       #+END_SRC
 
     #+REVEAL: split
+
     #+BEGIN_SRC java
       class Follower extends Character implements Interaction
       {
@@ -157,21 +169,18 @@
      class PlayState extends FlxState
      {
          private FlxSprite goal;
-         private List<POI> interactables; // randomly generated
-   
+         private List<POI> interactables; // randomly generated   
      }
    #+END_SRC
 
 *** Points of Interest (POIs)
 
     - *Points of Interest* (*POIs*) in environment
-    - Follower may *interact* with any POI within =Follower.sightRadius=
+    - Follower may *interact* with any POI within =Follower.bubbleSight.radius=
       - Interactions:
         - Clever quips
         - Item acquisition
         - Etc.
-      - Overrides Leader-Follower radius restrictions
-        - Reinstated upon interaction completion
 
 * Demo Time
   #+REVEAL_HTML: <object width="900" height="500"> <param name="movie" value="demo/demo.swf"> <embed src="demo/demo.swf" width="900" height="500"> </embed> </object>

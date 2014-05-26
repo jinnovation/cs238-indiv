@@ -34,8 +34,14 @@
 <h2>On Realism</h2>
 <ul class="org-ul">
 <li><b>Realism</b> = common goal among development teams
+<ul class="org-ul">
+<li>Believability
 </li>
-<li>&uarr; realism &rarr; &uarr; desirability
+<li>Credibility
+</li>
+</ul>
+</li>
+<li>&uarr; realism &rarr; &uarr; consumer desire &rarr; &uarr; profit
 </li>
 </ul>
 </section>
@@ -47,12 +53,12 @@
 <h2>Graphics</h2>
 <ul class="org-ul">
 <li>Commonly used to achieve realism
-<ul class="org-ul">
+</li>
 <li><b>Very</b> good at this
+<ul class="org-ul">
+<li>Modern-day graphics hardware &rarr; &darr; tech barriers
 </li>
 </ul>
-</li>
-<li>Modern-day graphics hardware &rarr; &darr; tech barriers
 </li>
 </ul>
 
@@ -89,7 +95,7 @@ Insanely&#x2026;
 <h3><img src="img/O0vv1b7 - Imgur.jpg" alt="O0vv1b7 - Imgur.jpg" /></h3>
 <aside class="notes">
 <p>
-Realistic visually.
+Realistic.
 </p>
 </aside>
 </section>
@@ -117,12 +123,16 @@ But for most part OK.
 <h3>A Slight Problem</h3>
 <ul class="org-ul">
 <li>Visual realism = "straightforward"
+<ul class="org-ul">
+<li>Established tech stack + practices
 </li>
-<li><b>Inherent difficulties</b> associated with computer graphics
+</ul>
+</li>
+<li>&exist; <b>Inherent difficulties</b> associated with computer graphics
 <ul class="org-ul">
 <li>Diminishing returns
 </li>
-<li>Uncanny Valley
+<li><b>Uncanny Valley</b>
 </li>
 </ul>
 </li>
@@ -150,13 +160,19 @@ But for most part OK.
 <ul class="org-ul">
 <li>Unique <b>path-finding algorithm</b> for Elizabeth
 </li>
-<li>Goal: algorithmically model <b>humanity</b> &amp; <b>realistic human behavior</b>
+<li>Goals
+<ul class="org-ul">
+<li>Algorithmically model <b>humanity</b> &amp; <b>realistic human behavior</b>
 <ul class="org-ul">
 <li>Curiosity
 </li>
 <li>Autonomy
 </li>
 <li>Exploration
+</li>
+</ul>
+</li>
+<li>Create emotional attachment + investment to her
 </li>
 </ul>
 </li>
@@ -173,11 +189,25 @@ But for most part OK.
 
 <h3>Key Points</h3>
 <ul class="org-ul">
+<li>"Both follow and lead"
+<ul class="org-ul">
+<li>Balance distance to PC
+<ul class="org-ul">
+<li>"Too close is too creepy"
+</li>
+</ul>
+</li>
+<li>Free movement between PC and next <b>goal location</b>
+</li>
+</ul>
+</li>
 <li>Leader-follower model
 </li>
-<li>Destination-setting
+<li>Points of Interest (POIs)
+<ul class="org-ul">
+<li>Freely <b>inspect</b> + <b>comment on</b> game world objects
 </li>
-<li>Goals and Points of Interest (POIs)
+</ul>
 </li>
 </ul>
 
@@ -220,9 +250,6 @@ But for most part OK.
 
     <span style="color: #89AAEB;">private</span> <span style="color: #98f5ff;">Periphery</span> <span style="color: #ebcb8b;">bubbleSight</span>;
 
-    <span style="color: #89AAEB;">private</span> <span style="color: #89AAEB;">static</span> <span style="color: #89AAEB;">const</span> <span style="color: #98f5ff;">int</span> <span style="color: #ebcb8b;">destRadius</span>;
-    <span style="color: #89AAEB;">private</span> <span style="color: #89AAEB;">static</span> <span style="color: #89AAEB;">const</span> <span style="color: #98f5ff;">int</span> <span style="color: #ebcb8b;">visionDist</span>;
-
     <span style="color: #89AAEB;">private</span> <span style="color: #98f5ff;">void</span> <span style="color: #DCA432;">setDestTarget</span>(<span style="color: #98f5ff;">FlxObject</span> <span style="color: #ebcb8b;">target</span>);
     <span style="color: #89AAEB;">private</span> <span style="color: #98f5ff;">void</span> <span style="color: #DCA432;">setDest</span>(<span style="color: #98f5ff;">int</span> <span style="color: #ebcb8b;">x</span>, <span style="color: #98f5ff;">int</span> <span style="color: #ebcb8b;">y</span>);
     <span style="color: #89AAEB;">private</span> <span style="color: #98f5ff;">void</span> <span style="color: #DCA432;">setDestRandom</span>();
@@ -242,6 +269,7 @@ But for most part OK.
 
 </section>
 <section>
+
 <div class="org-src-container">
 
 <pre  class="src src-java"><span style="color: #89AAEB;">class</span> <span style="color: #98f5ff;">Follower</span> <span style="color: #89AAEB;">extends</span> <span style="color: #98f5ff;">Character</span> <span style="color: #89AAEB;">implements</span> <span style="color: #98f5ff;">Interaction</span>
@@ -287,8 +315,7 @@ But for most part OK.
 <pre  class="src src-java"><span style="color: #89AAEB;">class</span> <span style="color: #98f5ff;">PlayState</span> <span style="color: #89AAEB;">extends</span> <span style="color: #98f5ff;">FlxState</span>
 {
     <span style="color: #89AAEB;">private</span> <span style="color: #98f5ff;">FlxSprite</span> <span style="color: #ebcb8b;">goal</span>;
-    <span style="color: #89AAEB;">private</span> <span style="color: #98f5ff;">List</span>&lt;POI&gt; interactables; <span style="color: #4f5b67;">// </span><span style="color: #4f5b67;">randomly generated</span>
-
+    <span style="color: #89AAEB;">private</span> <span style="color: #98f5ff;">List</span>&lt;POI&gt; interactables; <span style="color: #4f5b67;">// </span><span style="color: #4f5b67;">randomly generated   </span>
 }
 </pre>
 </div>
@@ -300,7 +327,7 @@ But for most part OK.
 <ul class="org-ul">
 <li><b>Points of Interest</b> (<b>POIs</b>) in environment
 </li>
-<li>Follower may <b>interact</b> with any POI within <code>Follower.sightRadius</code>
+<li>Follower may <b>interact</b> with any POI within <code>Follower.bubbleSight.radius</code>
 <ul class="org-ul">
 <li>Interactions:
 <ul class="org-ul">
@@ -309,12 +336,6 @@ But for most part OK.
 <li>Item acquisition
 </li>
 <li>Etc.
-</li>
-</ul>
-</li>
-<li>Overrides Leader-Follower radius restrictions
-<ul class="org-ul">
-<li>Reinstated upon interaction completion
 </li>
 </ul>
 </li>
