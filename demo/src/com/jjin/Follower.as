@@ -10,8 +10,7 @@ package com.jjin
     import org.flixel.plugin.photonstorm.FlxVelocity;
     import org.flixel.plugin.photonstorm.FlxMath;
     import org.flixel.plugin.photonstorm.FlxDelay;
-
-    import flash.utils.getQualifiedClassName;
+    import org.flixel.plugin.photonstorm.FlxColor;
 
     public class Follower extends Character implements Interaction
     {
@@ -36,6 +35,8 @@ package com.jjin
 
             this.leader = leader;
             this.setRandomDest();
+
+            this.dialogBox.setFormat("Comic Sans", 12);
         }
 
         public function set leader(ldr:Leader):void { _leader = ldr; }
@@ -112,6 +113,10 @@ package com.jjin
                 this.setRandomDest();
             }
 
+            if (Math.random() < 0.001) {
+                say("BOOKER CATCH!");
+            }
+
             if (dialogTimer.hasExpired) {
                 dialogBox.text = "";
             }
@@ -147,6 +152,7 @@ package com.jjin
 
         private function say(line:String):void
         {
+            this.dialogBox.setFormat("Comic Sans", 12, FlxColor.getRandomColor());
             this.dialogBox.text = line;
             dialogTimer.start();
         }

@@ -28,7 +28,7 @@ package com.jjin
 
             _dBoxOffset = this.height / -2;
             
-            _dialogBox = new FlxText(X, Y + _dBoxOffset, 100);
+            _dialogBox = new FlxText(X, Y + _dBoxOffset, 150, null, false);
         }
 
         override public function update():void

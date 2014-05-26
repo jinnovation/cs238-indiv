@@ -50,13 +50,20 @@ package com.jjin.state
 
         private function interactablesGenerate():void
         {
+            var quips:Array = ["Come dance with me Mr. DeWitt!",
+                "There is always a lighthouse.",                
+                "A man chooses; a slave obeys.",
+                "Would you kindly?",
+                "My power...it's over 9000!"
+            ];
+            
             var interactableCurr:POI;
             for (var i:int=0 ; i<nInteractables ; i++) {
                 var xPos:int = FlxMath.rand(0, FlxG.width);
                 var yPos:int = FlxMath.rand(0, FlxG.height);
 
                 interactableCurr = new POI(xPos, yPos);
-                interactableCurr.quip = "Quip number " + Number(i+1).toString();
+                interactableCurr.quip = quips[i];
 
                 _interactables.add(interactableCurr);
             }
