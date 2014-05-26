@@ -248,6 +248,8 @@ But for most part OK.
     <span style="color: #89AAEB;">private</span> <span style="color: #98f5ff;">FlxPoint</span> <span style="color: #ebcb8b;">destCurr</span>;
     <span style="color: #89AAEB;">private</span> <span style="color: #98f5ff;">FlxSprite</span> <span style="color: #ebcb8b;">destMarker</span>;
 
+    <span style="color: #89AAEB;">private</span> <span style="color: #98f5ff;">int</span> <span style="color: #ebcb8b;">destRadius</span>;
+
     <span style="color: #89AAEB;">private</span> <span style="color: #98f5ff;">Periphery</span> <span style="color: #ebcb8b;">bubbleSight</span>;
 
     <span style="color: #89AAEB;">private</span> <span style="color: #98f5ff;">void</span> <span style="color: #DCA432;">setDestTarget</span>(<span style="color: #98f5ff;">FlxObject</span> <span style="color: #ebcb8b;">target</span>);
@@ -278,13 +280,24 @@ But for most part OK.
 
     <span style="color: #89AAEB;">public</span> <span style="color: #98f5ff;">POI</span> <span style="color: #DCA432;">scanForPOIs</span>()
     {
-        foreach (i <span style="color: #98f5ff;">in</span> currenStage.<span style="color: #ebcb8b;">interactables</span>) {
+        foreach (i <span style="color: #98f5ff;">in</span> currentStage.<span style="color: #ebcb8b;">interactables</span>) {
             <span style="color: #98f5ff;">boolean</span> <span style="color: #ebcb8b;">isWithinRange</span>
                 = distBetween(<span style="color: #89AAEB;">this</span>, i) &lt; <span style="color: #89AAEB;">this</span>.bubbleSight.radius;
 
             <span style="color: #89AAEB;">if</span> (isWithinRange) <span style="color: #89AAEB;">return</span> i;
         }
-        <span style="color: #89AAEB;">return</span> <span style="color: #B4EB89;">null</span>;        
+        <span style="color: #89AAEB;">return</span> <span style="color: #B4EB89;">null</span>;
+
+        <span style="color: #89AAEB;">public</span> <span style="color: #98f5ff;">void</span> <span style="color: #ebcb8b;">update</span>()
+        {
+            <span style="color: #89AAEB;">this</span>.move();
+            <span style="color: #89AAEB;">if</span> (distanceToPoint(<span style="color: #89AAEB;">this</span>, <span style="color: #89AAEB;">this</span>.destCurr) &lt; <span style="color: #89AAEB;">this</span>.destRadius) {
+                <span style="color: #89AAEB;">if</span> ((<span style="color: #98f5ff;">POI</span> <span style="color: #ebcb8b;">i</span> = scanForPOIs()) != <span style="color: #B4EB89;">null</span>)
+                    interact(i);
+
+                setRandomDest();
+            }
+        }
     }
 
     <span style="color: #89AAEB;">public</span> <span style="color: #98f5ff;">void</span> <span style="color: #DCA432;">interact</span>(<span style="color: #98f5ff;">POI</span> <span style="color: #ebcb8b;">item</span>);
