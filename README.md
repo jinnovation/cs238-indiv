@@ -1,8 +1,4 @@
 # Finding Elizabeth: Pathfinding and Alternative Realism #
-By: Jonathan Jin
-    John Reppy
-    CMSC23800
-    05/29/14
 
 ## Overview ##
 
