@@ -1,8 +1,11 @@
 # Finding Elizabeth: Pathfinding and Alternative Realism #
 
 Jonathan Jin
+
 John Reppy
+
 `CMSC23800`
+
 05/29/14
 
 ## Overview ##
