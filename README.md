@@ -1,4 +1,8 @@
 # Finding Elizabeth: Pathfinding and Alternative Realism #
+By: Jonathan Jin
+    John Reppy
+    CMSC23800
+    05/29/14
 
 ## Overview ##
 
@@ -70,13 +74,16 @@ The implementation consists of the following main classes:
 
 ### Build Instructions ###
 
+The demo is located in the `demo/` directory.
+
 Building the demo requires the
-[Flex SDK](http://www.adobe.com/devnet/flex.html). With it installed, one can
-build with:
+[Flex SDK](http://www.adobe.com/devnet/flex.html). With it installed, one can,
+while inside the demo directory, build with:
 ```
-mxmlc -static-link-runtime-shared-libraries src/Elizabeth.as -output ./demo.swf
+mxmlc
+-static-link-runtime-shared-libraries src/Elizabeth.as -output ./demo.swf
 ```
-There is also a Makefile; `make` will run the above.
+There is also a Makefile; `make` will run the above command.
 
 Alternatively, this project and presentation is also hosted
 [here](http://jinnovation.github.io/cs238-indiv/); the demo is on the last
