@@ -92,3 +92,9 @@ There is also a Makefile; `make` will run the above command.
 Alternatively, this project and presentation is also hosted
 [here](http://jinnovation.github.io/cs238-indiv/); the demo is on the last
 slide.
+
+## Sources ##
+
+Corriea, Alexa. "The long road to building AI for BioShock Infinite's
+Elizabeth." *Polygon*. N.p., 18 Mar. 2014. Web. 27 May 2014.
+<http://www.polygon.com/2014/3/18/5522450/the-long-road-to-perfecting-ai-for-bioshock-infinites-elizabeth>.
